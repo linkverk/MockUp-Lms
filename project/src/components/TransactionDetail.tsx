@@ -85,6 +85,19 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ transaction }) =>
           </div>
         </div>
       )}
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-3">Location</h3>
+        <div className="w-full h-64">
+            <iframe
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0 }}
+            src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2466.4552779249157!2d4.396775915781359!3d51.816113179687044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c436524bfc97cb%3A0xb3095188bbe02ae6!2sFrans+Halsstraat+75%2C+3262+HE+Oud-Beijerland!5e0!3m2!1snl!2snl!4v1536248828862`}
+            allowFullScreen
+            ></iframe>
+        </div>
+      </div>
     </div>
   );
 };
