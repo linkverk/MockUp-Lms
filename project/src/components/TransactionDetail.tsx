@@ -1,6 +1,16 @@
 import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import { Transaction, TestReport } from '../types';
 import { AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
+import L from 'leaflet';
+
+// Fix for default marker icon issue with leaflet
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+});
 
 interface TransactionDetailProps {
   transaction: Transaction;
@@ -22,6 +32,20 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ transaction }) =>
       default: return <AlertTriangle className="w-5 h-5 text-yellow-600" />;
     }
   };
+
+  const renderMap = (lat: number, lng: number) => (
+    <MapContainer center={[lat, lng]} zoom={13} style={{ height: '100%', width: '100%' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={[lat, lng]}>
+        <Popup>
+          Charge Point Location
+        </Popup>
+      </Marker>
+    </MapContainer>
+  );
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -90,14 +114,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ transaction }) =>
         <div className="mt-6">
           <h3 className="text-lg font-semibold mb-3">Location</h3>
           <div className="w-full h-64">
-            <iframe
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              style={{ border: 0 }}
-              src={`https://www.openstreetmap.org/export/embed.html?bbox=4.4564657,51.9089924,4.4584657,51.9109924&layer=mapnik&marker=51.9099924,4.4574657`}
-              allowFullScreen
-            ></iframe>
+            {renderMap(51.9099924, 4.4574657)}
           </div>
         </div>
       )}
@@ -106,14 +123,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ transaction }) =>
         <div className="mt-6">
           <h3 className="text-lg font-semibold mb-3">Location</h3>
           <div className="w-full h-64">
-            <iframe
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              style={{ border: 0 }}
-              src={`https://www.openstreetmap.org/export/embed.html?bbox=4.4926074,51.8864125,4.4946074,51.8884125&layer=mapnik&marker=51.8874125,4.4936074`}
-              allowFullScreen
-            ></iframe>
+            {renderMap(51.2091137, 4.4122744)}
           </div>
         </div>
       )}
