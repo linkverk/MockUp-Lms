@@ -114,7 +114,7 @@ const TransactionDetail: React.FC<TransactionDetailProps> = ({ transaction }) =>
         <div className="mt-6">
           <h3 className="text-lg font-semibold mb-3">Location</h3>
           <div className="w-full h-64">
-            {renderMap(51.9099924, 4.4574657)}
+            {renderMap(52.369851, 4.902732)}
           </div>
         </div>
       )}
