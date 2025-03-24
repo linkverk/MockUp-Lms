@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+interface LoginFormProps {
+    onLogin: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -11,7 +15,8 @@ const LoginForm = () => {
         e.preventDefault();
 
         if (username === 'admin' && password === 'admin') {
-            navigate('/');
+            onLogin();
+            //navigate('/');
         } else {
             setError('Invalid credentials');
         }
